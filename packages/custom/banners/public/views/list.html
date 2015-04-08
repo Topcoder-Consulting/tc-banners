@@ -1,0 +1,76 @@
+<section data-ng-controller="BannersController" data-ng-init="find()">
+
+    <form>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                <input type="text" class="form-control" placeholder="Filter...." ng-model="keyword">
+            </div>
+        </div>
+    </form>
+
+    <table class="table table-bordered table-striped">
+
+        <thead>
+        <tr>
+            <td>
+                <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+                    Name
+                    <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#" ng-click="sortType = 'size'; sortReverse = !sortReverse">
+                    Size
+                    <span ng-show="sortType == 'size' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'size' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#" ng-click="sortType = 'ends'; sortReverse = !sortReverse">
+                    Stops Displaying
+                    <span ng-show="sortType == 'ends' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'ends' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#" ng-click="sortType = 'impressions'; sortReverse = !sortReverse">
+                    Impressions
+                    <span ng-show="sortType == 'impressions' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'impressions' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#" ng-click="sortType = 'clicks'; sortReverse = !sortReverse">
+                    Clicks
+                    <span ng-show="sortType == 'clicks' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'clicks' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>CTR</td>
+            <td>
+                <a href="#" ng-click="sortType = 'isActive'; sortReverse = !sortReverse">
+                    Active
+                    <span ng-show="sortType == 'isActive' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'isActive' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="banner in banners | orderBy:sortType:sortReverse | filter:keyword">
+            <td><a data-ng-href="#!/banners/{{banner._id}}">{{banner.name}}</a></td>
+            <td>{{ banner.size }}</td>
+            <td>{{banner.ends | date:"dd-MMMM-yyyy"}}</td>
+            <td>{{ banner.impressions}}</td>
+            <td>{{ banner.clicks}}</td>
+            <td>{{banner.clicks / banner.impressions | number:3}}%</td>
+            <td>{{ banner.isActive}}</td>
+        </tr>
+        </tbody>
+
+    </table>
+
+</section>

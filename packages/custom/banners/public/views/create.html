@@ -1,0 +1,113 @@
+<section data-ng-controller="BannersController" data-ng-init="new()">
+
+    <form name="bannerForm" class="form-horizontal col-md-6" role="form" data-ng-submit="create(bannerForm.$valid)" novalidate>
+
+        <div class="col-md-12" style="padding-bottom:25px">
+            <h2>New Banner</h2>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : submitted && bannerForm.name.$invalid }">
+            <label mean-token="'edit-title'" for="name" class="col-md-4 control-label">Name</label>
+            <div class="col-md-8">
+                <input name="name" type="text" class="form-control" data-ng-model="banner.name" id="name" placeholder="Name" required>
+                <div ng-show="submitted && bannerForm.name.$invalid" class="help-block">
+                    <p ng-show="bannerForm.name.$error.required">Name is required</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : submitted && bannerForm.imageUrl.$invalid }">
+            <label mean-token="'edit-content'" for="imageUrl" class="col-md-4 control-label">Image URL</label>
+            <div class="col-md-8">
+                <input name="imageUrl" type="text" class="form-control" data-ng-model="banner.imageUrl" id="imageUrl" placeholder="Image URL" required>
+                <div ng-show="submitted && bannerForm.imageUrl.$invalid" class="help-block">
+                    <p ng-show="bannerForm.imageUrl.$error.required">Image URL is required</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : submitted && bannerForm.targetUrl.$invalid }">
+            <label mean-token="'edit-content'" for="targetUrl" class="col-md-4 control-label">Target URL</label>
+            <div class="col-md-8">
+                <input name="targetUrl" type="text" class="form-control" data-ng-model="banner.targetUrl" id="targetUrl" placeholder="Target URL" required>
+                <div ng-show="submitted && bannerForm.targetUrl.$invalid" class="help-block">
+                    <p ng-show="bannerForm.targetUrl.$error.required">Target URL is required</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : submitted && bannerForm.alt.$invalid }">
+            <label mean-token="'edit-content'" for="alt" class="col-md-4 control-label">Alt Text</label>
+            <div class="col-md-8">
+                <input name="alt" type="text" class="form-control" data-ng-model="banner.alt" id="alt" placeholder="Alt text">
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : submitted && bannerForm.size.$invalid }">
+            <label mean-token="'edit-content'" for="size" class="col-md-4 control-label">Size</label>
+            <div class="col-md-8">
+                <select id="size" name="size" data-ng-model="banner.size" class="form-control"
+                        ng-options="t for t in bannerSizes">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : submitted && bannerForm.starts.$invalid }">
+            <label mean-token="'edit-content'" for="starts" class="col-md-4 control-label">Starts Displaying</label>
+            <div class="col-md-8">
+                <p class="input-group">
+                    <input type="text" id="starts" class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="banner.starts" is-open="starts" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event,'starts')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : submitted && bannerForm.ends.$invalid }">
+            <label mean-token="'edit-content'" for="ends" class="col-md-4 control-label">Stops Displaying</label>
+            <div class="col-md-8">
+                <p class="input-group">
+                    <input type="text" id="ends" class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="banner.ends" is-open="ends" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event, 'ends')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : submitted && bannerForm.description.$invalid }">
+            <label mean-token="'edit-content'" for="description" class="col-md-4 control-label">Comments</label>
+            <div class="col-md-8">
+                <textarea name="description" data-ng-model="banner.description" id="description" cols="30" rows="4" placeholder="Any type of internal description" class="form-control"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : submitted && bannerForm.campaign.$invalid }">
+            <label mean-token="'edit-content'" for="campaign" class="col-md-4 control-label">Campaign</label>
+            <div class="col-md-8">
+                <input name="campaign" type="text" class="form-control" data-ng-model="banner.campaign" id="campaign" placeholder="Campaign">
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : submitted && bannerForm.tags.$invalid }">
+            <label mean-token="'edit-content'" for="tags" class="col-md-4 control-label">Tags</label>
+            <div class="col-md-8">
+                <input name="tags" type="text" class="form-control" data-ng-model="banner.tags" id="tags" placeholder="Comma separated list of tags">
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : submitted && bannerForm.isActive.$invalid }">
+            <label mean-token="'edit-content'" for="active" class="col-md-4 control-label">Active?</label>
+            <div class="col-md-8">
+                <input name="isActive" type="checkbox" class="form-control" data-ng-model="banner.isActive" id="active">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-8">
+                <button mean-token="'edit-submit'" type="submit" class="btn btn-default">Submit</button>
+            </div>
+        </div>
+    </form>
+</section>

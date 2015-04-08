@@ -1,0 +1,46 @@
+<section data-ng-controller="BannersController" data-ng-init="findOne()">
+    <h2>{{banner.name}}</h2>
+    <a class="btn" href="/#!/banners/{{banner._id}}/edit">
+        <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn" data-ng-click="remove(banner);">
+        <i class="glyphicon glyphicon-trash"></i>
+    </a>
+
+    <div style="padding: 25px">
+        <img src="{{banner.imageUrl}}">
+    </div>
+
+    <div>
+        <dl className="dl-horizontal">
+            <dt>Impressions</dt>
+            <dd>{{banner.impressions}}</dd>
+            <dt>Clicks</dt>
+            <dd>{{banner.clicks}}</dd>
+            <dt>CTR</dt>
+            <dd>{{banner.clicks / banner.impressions | number:3}}%</dd>
+            <dt>Size</dt>
+            <dd>{{banner.size}}</dd>
+            <dt>Starts Displaying</dt>
+            <dd>{{banner.starts | date:"dd-MMMM-yyyy"}}</dd>
+            <dt>Stops Displaying</dt>
+            <dd>{{banner.ends | date:"dd-MMMM-yyyy"}}</dd>
+            <dt>Image</dt>
+            <dd>{{banner.imageUrl}}</dd>
+            <dt>Target URL</dt>
+            <dd><a href="{{banner.targetUrl}}" target="_blank">{{banner.targetUrl}}</a></dd>
+            <dt>Alt Text</dt>
+            <dd>{{banner.alt}}</dd>
+            <dt>Campaign</dt>
+            <dd>{{banner.campaign}}</dd>
+            <dt>Tags</dt>
+            <dd>{{banner.tags.toString()}}</dd>
+            <dt>Active?</dt>
+            <dd>{{banner.isActive}}</dd>
+        </dl>
+    </div>
+
+    <div>{{banner.description}}</div>
+</section>
+
+<div style="padding-bottom:50px"></div>
